@@ -26,7 +26,8 @@ public class SpaceInvadersActivity extends Activity {
         display.getSize(size);
 
         // Initialize gameView and set it as the view
-
+        spaceInvadersView = new SpaceInvadersView(this, size.x, size.y);
+        setContentView(spaceInvadersView);
     }
 
     // This method executes when the player starts the game
