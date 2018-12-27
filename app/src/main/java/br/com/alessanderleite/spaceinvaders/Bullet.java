@@ -56,7 +56,7 @@ public class Bullet {
             y = startY;
             heading = direction;
             isActive = true;
-            return true
+            return true;
         }
 
         // Bullet already active
