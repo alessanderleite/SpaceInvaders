@@ -36,6 +36,7 @@ public class SpaceInvadersActivity extends Activity {
         super.onResume();
 
         // Tell the gameView resume method to execute
+        spaceInvadersView.resume();
     }
 
     // This method executes when the player quits the game
@@ -44,5 +45,6 @@ public class SpaceInvadersActivity extends Activity {
         super.onPause();
 
         //Tell the gameView pause method to execute
+        spaceInvadersView.pause();
     }
 }
