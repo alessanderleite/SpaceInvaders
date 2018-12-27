@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -159,6 +160,95 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
+        while (playing) {
 
+            // Capture the current time in milliseconds in startFrameTime
+            long startFrameTime = System.currentTimeMillis();
+
+            // Update the frame
+            if (!paused) {
+                update();
+            }
+
+            // Draw the frame
+            draw();
+
+            // Calculate the fps this frame
+            // We can then use the result to
+            // time animations and more
+            timeThisFrame = System.currentTimeMillis() - startFrameTime;
+            if (timeThisFrame >= 1) {
+                fps = 1000 / timeThisFrame;
+            }
+
+            // We will do something new here towards the end of the project
+        }
+    }
+
+    private void update() {
+
+        // Did an invader bump into the side of the screen
+        boolean bumped = false;
+
+        // Has the player lost
+        boolean lost = false;
+
+        // Move the player's ship
+
+        // Update the invaders if visible
+
+        // Update all the invaders bullets if active
+
+        // Did an invader bump into the edge of the screen
+
+        if (lost) {
+            prepareLevel();
+        }
+
+        // Update the players bullet
+
+        // Has the player's bullet hit the top of the screen
+
+        // Has an invaders bullet hit the bottom of the screen
+
+        // Has the player's bullet hit an invader
+
+        // Has an alien bullet hit a shelter brick
+
+        // Has a player bullet hit a shelter brick
+
+        // Has an invader bullet hit the player ship
+
+    }
+
+    private void draw() {
+        // Make sure our drawing surface is valid or we crash
+        if (ourHolder.getSurface().isValid()) {
+            // Lock the canvas ready to draw
+            canvas = ourHolder.lockCanvas();
+
+            // Draw the background color
+            canvas.drawColor(Color.argb(255, 26, 128, 182));
+
+            // Choose the brush color for drawing
+            paint.setColor(Color.argb(255, 255, 255, 255));
+
+            // Draw the player spaceship
+
+            // Draw the invaders
+
+            // Draw the bricks if visible
+
+            // Draw the players bullet if active
+
+            // Draw the invaders bullets if active
+
+            // Draw the score and remaing lives
+            // Change the brush color
+            paint.setColor(Color.argb(255, 249, 129, 0));
+
+            // Draw everything to the screen
+            ourHolder.unlockCanvasAndPost(canvas);
+        }
     }
 }
