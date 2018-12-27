@@ -60,4 +60,27 @@ public class PlayerShip {
         // How fast is the spaceship in pixels per second
         shipSpeed = 350;
     }
+
+    public RectF getRect() {
+        return rect;
+    }
+
+    // This is a getter method to make the rectangle that
+    // defines ourship available in SpaceInvadersView class
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getLength() {
+        return length;
+    }
+
+    // This method will be used to chage/set if the ship is going left, right or nowhere
+    public void setMovementState(int state) {
+        shipMoving = state;
+    }
 }
