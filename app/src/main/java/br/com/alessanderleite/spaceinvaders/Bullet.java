@@ -29,4 +29,24 @@ public class Bullet {
 
         rect = new RectF();
     }
+
+    public RectF getRect() {
+        return rect;
+    }
+
+    public boolean getStatus() {
+        return  isActive;
+    }
+
+    public void setInactive() {
+        isActive = false;
+    }
+
+    public float getImpactPointY() {
+        if (heading == DOWN) {
+            return  y + height;
+        } else {
+            return y;
+        }
+    }
 }
