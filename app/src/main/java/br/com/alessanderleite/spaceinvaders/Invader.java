@@ -73,4 +73,35 @@ public class Invader {
         shipSpeed = 40;
     }
 
+    public void setInvisible() {
+        isVisible = false;
+    }
+
+    public boolean getVisibility() {
+        return isVisible;
+    }
+
+    public RectF getRect() {
+        return rect;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap1;
+    }
+
+    public Bitmap getBitmap2() {
+        return bitmap2;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getLength() {
+        return length;
+    }
 }
