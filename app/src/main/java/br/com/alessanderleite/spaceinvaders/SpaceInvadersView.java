@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -246,9 +247,49 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
             // Draw the score and remaing lives
             // Change the brush color
             paint.setColor(Color.argb(255, 249, 129, 0));
+            paint.setTextSize(40);
+            canvas.drawText("Score: " + score + "   Lives: " + lives, 10, 50, paint);
 
             // Draw everything to the screen
             ourHolder.unlockCanvasAndPost(canvas);
         }
+    }
+
+    // If SpaceInvadersActivity is paused/stopped
+    // shutdown our thread
+    public void pause() {
+        playing = false;
+        try {
+            gameThread.join();
+        } catch (InterruptedException e) {
+            Log.e("Error:", "joining thread");
+        }
+    }
+
+    // If SpaceInvadersActivity is started then
+    // start our thread.
+    public void resume() {
+        playing = true;
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    // The SurfaceView class implements onTouchListener
+    // So we can override thes method and detect screen touches.
+
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+
+        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+
+            // Player has touched the screen
+            case MotionEvent.ACTION_DOWN:
+                break;
+
+            // Player has removed finger from screen
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return true;
     }
 }
