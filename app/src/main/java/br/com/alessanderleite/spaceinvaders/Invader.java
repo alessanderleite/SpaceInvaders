@@ -104,4 +104,31 @@ public class Invader {
     public float getLength() {
         return length;
     }
+
+    public void update(long fps) {
+        if (shipMoving == LEFT) {
+            x = x - shipSpeed / fps;
+        }
+        if (shipMoving == RIGHT) {
+            x = x + shipSpeed / fps;
+        }
+
+        // Update rect which is used to detect hits
+        rect.top = y;
+        rect.bottom = y + height;
+        rect.left = x;
+        rect.right = x + length;
+    }
+
+    public void dropDownAndReverse() {
+        if (shipMoving == LEFT) {
+            shipMoving = RIGHT;
+        } else {
+            shipMoving = LEFT;
+        }
+
+        y = y + height;
+
+        shipSpeed = shipSpeed * 1.18f;
+    }
 }
