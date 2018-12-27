@@ -307,10 +307,32 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
 
             // Player has touched the screen
             case MotionEvent.ACTION_DOWN:
+
+                paused = false;
+
+                if (motionEvent.getY() > screenY - screenY / 8) {
+                    if (motionEvent.getX() > screenX / 2) {
+                        playerShip.setMovementState(playerShip.RIGHT);
+                    } else {
+                        playerShip.setMovementState(playerShip.LEFT);
+                    }
+                }
+
+                if (motionEvent.getY() < screenY - screenY / 8) {
+                    // Shots fired
+                    if (bullet.shoot(playerShip.getX() +
+                        playerShip.getLength() / 2, screenY, bullet.UP)) {
+                            soundPool.play(shootID, 1, 1, 0, 0, 1);
+                    }
+                }
                 break;
 
             // Player has removed finger from screen
             case MotionEvent.ACTION_UP:
+
+                if (motionEvent.getY() > screenY - screenY / 10) {
+                    playerShip.setMovementState(playerShip.STOPPED);
+                }
                 break;
         }
         return true;
