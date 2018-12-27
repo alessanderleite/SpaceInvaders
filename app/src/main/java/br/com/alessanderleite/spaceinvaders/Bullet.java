@@ -49,4 +49,33 @@ public class Bullet {
             return y;
         }
     }
+
+    public boolean shoot(float startX, float startY, int direction) {
+        if (!isActive) {
+            x = startX;
+            y = startY;
+            heading = direction;
+            isActive = true;
+            return true
+        }
+
+        // Bullet already active
+        return false;
+    }
+
+    public void update(long fps) {
+
+        // Just move up or down
+        if (heading == UP) {
+            y = y - speed / fps;
+        } else {
+            y = y + speed / fps;
+        }
+
+        // Update rect
+        rect.left = x;
+        rect.right = x + width;
+        rect.top = y;
+        rect.bottom = y + height;
+    }
 }
