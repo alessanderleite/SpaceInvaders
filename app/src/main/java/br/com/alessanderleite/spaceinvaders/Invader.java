@@ -1,6 +1,8 @@
 package br.com.alessanderleite.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.RectF;
 
 import java.util.Random;
@@ -35,5 +37,40 @@ public class Invader {
     private int shipMoving = RIGHT;
 
     boolean isVisible;
+
+    public Invader(Context context, int row, int column, int screenX, int screenY) {
+
+        // Initialize a blank RectF
+        rect = new RectF();
+
+        length = screenX / 20;
+        height = screenY / 20;
+
+        isVisible = true;
+
+        int padding = screenX / 25;
+
+        x = column * (length + padding);
+        y = row * (length + padding / 4);
+
+        // Initialize the bitmap
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader2);
+
+        // stretch the first bitmap to a size appropriate for the screen resolution
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int)(length),
+                (int)(height),
+                false);
+
+        // stretch the first bitmap to a size appropriate for the screen resolution
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                (int)(length),
+                (int)(height),
+                false);
+
+        // How fast is the invader in pixels per second
+        shipSpeed = 40;
+    }
 
 }
