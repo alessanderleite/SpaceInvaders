@@ -1,8 +1,13 @@
 package br.com.alessanderleite.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.RectF;
 
 public class PlayerShip {
+
+    RectF rect;
 
     // The player ship will be represented by a Bitmap
     private Bitmap bitmap;
@@ -27,4 +32,32 @@ public class PlayerShip {
 
     // Is the ship moving and in which direction
     private int shipMoving = STOPPED;
+
+    // This the constructor method
+    // When we create an object from this class we will pass
+    // in the screen width and height
+    public PlayerShip(Context context, int screenX, int screenY) {
+
+        // Initialize a blank RectF
+        rect = new RectF();
+
+        length = screenX / 10;
+        height = screenY / 10;
+
+        // Start ship in roughly the screen centre
+        x = screenX / 2;
+        y = screenY - 20;
+
+        // Initialize the bitmap
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.playership);
+
+        // stretch the bitmap to a size appropriate for the screen resolution
+        bitmap = Bitmap.createScaledBitmap(bitmap,
+                (int) (length),
+                (int) (height),
+                false);
+
+        // How fast is the spaceship in pixels per second
+        shipSpeed = 350;
+    }
 }
