@@ -168,6 +168,15 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
         }
 
         // Build the shelters
+        numBricks = 0;
+        for (int shelterNumber = 0; shelterNumber < 4; shelterNumber++) {
+            for (int column = 0; column < 10; column++) {
+                for (int row = 0; row < 5; row++) {
+                    bricks[numBricks] = new DefenceBrick(row, column, shelterNumber, screenX, screenY);
+                    numBricks++;
+                }
+            }
+        }
 
         // Reset the menace level
         menaceInterval = 1000;
