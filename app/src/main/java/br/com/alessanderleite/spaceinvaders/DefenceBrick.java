@@ -24,7 +24,7 @@ public class DefenceBrick {
         int startHeight = screenY - (screenY / 8 * 2);
 
         rect = new RectF(column * width + brickPadding +
-                (shelterPadding + shelterNumber) +
+                (shelterPadding * shelterNumber) +
                 shelterPadding + shelterPadding * shelterNumber,
                 row * height + brickPadding + startHeight,
                 column * width + width - brickPadding +
