@@ -159,6 +159,13 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
             invadersBullets[i] = new Bullet(screenY);
         }
         // Build an army of invaders
+        numInvaders = 0;
+        for (int column = 0; column < 6; column++) {
+            for (int row = 0; row < 5; row++) {
+                invaders[numInvaders] = new Invader(context, row, column, screenX, screenY);
+                numInvaders ++;
+            }
+        }
 
         // Build the shelters
     }
@@ -203,21 +210,60 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
 
         // Update the invaders if visible
 
+        // Update the players bullet
+        if (bullet.getStatus()) {
+            bullet.update(fps);
+        }
+
         // Update all the invaders bullets if active
         for (int i = 0; i < invadersBullets.length; i++) {
             if (invadersBullets[i].getStatus()) {
                 invadersBullets[i].update(fps);
             }
         }
+
+        // Update all the invaders if visible
+        for (int i = 0; i < numInvaders; i++) {
+
+            if (invaders[i].getVisibility()) {
+                // Move the next invader
+                invaders[i].update(fps);
+
+                // Does he want to take a shot?
+                if (invaders[i].takeAim(playerShip.getX(),
+                        playerShip.getLength())) {
+
+                    // If so try and spawn a bullet
+                    if (invadersBullets[nextBullet].shoot(invaders[i].getX()
+                        + invaders[i].getLength() / 2,
+                            invaders[i].getY(), bullet.DOWN)) {
+
+                        // Shot fired
+                        // Prepare for the next shot
+                        nextBullet++;
+
+                        // Loop back to the first one if we have reached the last
+                        if (nextBullet == maxInvaderBullets) {
+                            // This stops the firing of another bullet until one completes its journey
+                            // Because if bullet 0 is still active shoot returns false.
+                            nextBullet = 0;
+                        }
+                    }
+                }
+
+                // If that move caused them to bump the screen change bumped to true
+                if (invaders[i].getX() > screenX - invaders[i].getLength()
+                        || invaders[i].getX() < 0) {
+                    bumped = true;
+                }
+            }
+        }
+
         // Did an invader bump into the edge of the screen
+
 
         if (lost) {
             prepareLevel();
-        }
-
-        // Update the players bullet
-        if (bullet.getStatus()) {
-            bullet.update(fps);
         }
 
         // Has the player's bullet hit the top of the screen
