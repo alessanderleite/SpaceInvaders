@@ -296,6 +296,14 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
             canvas.drawBitmap(playerShip.getBitmap(), playerShip.getX(), screenY - 50, paint);
 
             // Draw the invaders
+            for (int i = 0; i < numInvaders; i++) {
+                if (invaders[i].getVisibility()) {
+                    if (uhOrOh) {
+                        canvas.drawBitmap(invaders[i].getBitmap(), invaders[i].getX(), invaders[i].getY(), paint);
+                        canvas.drawBitmap(invaders[i].getBitmap2(), invaders[i].getX(), invaders[i].getY(), paint);
+                    }
+                }
+            }
 
             // Draw the bricks if visible
 
