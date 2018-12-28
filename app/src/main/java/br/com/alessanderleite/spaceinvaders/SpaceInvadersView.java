@@ -168,6 +168,9 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
         }
 
         // Build the shelters
+
+        // Reset the menace level
+        menaceInterval = 1000;
     }
 
     @Override
@@ -194,6 +197,23 @@ public class SpaceInvadersView extends SurfaceView implements Runnable {
             }
 
             // We will do something new here towards the end of the project
+            // Play a sound based on the menace level
+            if (!paused) {
+                if ((startFrameTime - lastMenaceTime) > menaceInterval) {
+                    if (uhOrOh) {
+                        // Play Uh
+                        soundPool.play(uhID, 1, 1, 0,0, 1);
+                    } else {
+                        // Play Oh
+                        soundPool.play(ohID, 1, 1, 0, 0, 1);
+                    }
+
+                    // Reset the last menace time
+                    lastMenaceTime = System.currentTimeMillis();
+                    // Alter value of uhOrOh
+                    uhOrOh = !uhOrOh;
+                }
+            }
         }
     }
 
